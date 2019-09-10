@@ -3,6 +3,9 @@ import { ParametersService } from '../../services/parameters.service';
 import { IParameters } from '../../interfaces/parameters';
 import * as d3 from 'd3';
 import { bubbleSort } from '../../algorthms/bubble-sort';
+import { selectionSort } from '../../algorthms/selection-sort';
+// import { mergeSort } from '../../algorthms/quick-sort';
+import { insertionSort } from '../../algorthms/insertion-sort';
 
 @Component({
   selector: 'app-bar-chart',
@@ -11,7 +14,7 @@ import { bubbleSort } from '../../algorthms/bubble-sort';
   styleUrls: ['./bar-chart.component.css']
 })
 export class BarChartComponent implements OnInit {
-  @ViewChild('chart') chartContainer: ElementRef;
+  @ViewChild('chart', {static: true}) chartContainer: ElementRef;
   heightPadding = 20;
   parameters: IParameters;
   legend: any;
@@ -47,6 +50,7 @@ export class BarChartComponent implements OnInit {
           this.sortArray();
         }
         if (parameters.sortAlgo !== undefined) {
+          this.generateArray();
           this.setLegend();
         }
         if (parameters.setArraySize) {
@@ -64,10 +68,9 @@ export class BarChartComponent implements OnInit {
 
   setLegend() {
     switch (this.parameters.sortAlgo) {
-      case 'Merge':
+      case 'Insertion':
         this.legend = {
           default: 'blue',
-          currenIndex: 'yellow',
           comparing: 'green',
           swaping: 'red',
           sorted: 'purple'
@@ -84,10 +87,11 @@ export class BarChartComponent implements OnInit {
         };
         break;
 
-      case 'Heap':
+      case 'Selection':
         this.legend = {
           default: 'blue',
           currenIndex: 'yellow',
+          minimum: 'black',
           comparing: 'green',
           swaping: 'red',
           sorted: 'purple'
@@ -116,7 +120,15 @@ export class BarChartComponent implements OnInit {
     this.parametersService.setReadySubject(false);
 
 
-    bubbleSort(this.dataset, this.legend, this.parameters.speed, (dataset) => {
+    // bubbleSort(this.dataset, this.legend, this.parameters.speed, (dataset) => {
+    //   this.dataset = dataset;
+    //   this.renderChart();
+    // }, () => {
+    //   this.parametersService.setReadySubject(true);
+    // });
+
+
+    selectionSort(this.dataset, this.legend, this.parameters.speed, (dataset) => {
       this.dataset = dataset;
       this.renderChart();
     }, () => {
@@ -151,7 +163,7 @@ export class BarChartComponent implements OnInit {
     const yScale = d3
     .scaleLinear()
     .rangeRound([0, chartHeight])
-    .domain([0, d3.max(dataset.values)]);
+    .domain([0, Number(d3.max(dataset.values))]);
 
     const xScale = (index) => {
       return (chartWidth / dataset.values.length) * index;
@@ -168,7 +180,7 @@ export class BarChartComponent implements OnInit {
 
     // Create bars
     svg.selectAll('rect')
-    .data(dataset.values, (d) => d)
+    .data(dataset.values, (d: number) => d.toString())
     .enter()
     .append('rect')
     .attr('x', (d, i) => xScale(i) )
@@ -179,10 +191,10 @@ export class BarChartComponent implements OnInit {
 
     // Create labels
     svg.selectAll('text')
-    .data(dataset.values, (d) => d)
+    .data(dataset.values, (d: number) => d.toString())
     .enter()
     .append('text')
-    .text((d) => d )
+    .text((d: number) => d.toString() )
     .attr('text-anchor', 'middle')
     .attr('x', (d, i) => (xScale(i) + (xScale(1) / 2)) )
     .attr('y', (d) => (yScale(d) - 14) )

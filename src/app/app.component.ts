@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
   ready = false;
   readyToRun = true;
   parameters: IParameters;
-  speed = 5;
+  speed = 10;
 
   constructor(private parametersService: ParametersService) {
     this.parameters = {
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit{
       sortAlgo: null,
       sort: false,
       setArraySize: false,
-      speed: 5
+      speed: 10
     };
   }
 
