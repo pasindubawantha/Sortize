@@ -4,7 +4,6 @@ import { IParameters } from '../../interfaces/parameters';
 import * as d3 from 'd3';
 import { bubbleSort } from '../../algorthms/bubble-sort';
 import { selectionSort } from '../../algorthms/selection-sort';
-// import { mergeSort } from '../../algorthms/quick-sort';
 import { insertionSort } from '../../algorthms/insertion-sort';
 
 @Component({
@@ -77,16 +76,6 @@ export class BarChartComponent implements OnInit {
         };
         break;
 
-      case 'Quick':
-        this.legend = {
-          default: 'blue',
-          currenIndex: 'yellow',
-          comparing: 'green',
-          swaping: 'red',
-          sorted: 'purple'
-        };
-        break;
-
       case 'Selection':
         this.legend = {
           default: 'blue',
@@ -119,21 +108,34 @@ export class BarChartComponent implements OnInit {
 
     this.parametersService.setReadySubject(false);
 
+    switch(this.parameters.sortAlgo) {
+      case 'Insertion':
+        insertionSort(this.dataset, this.legend, this.parameters.speed, (dataset) => {
+          this.dataset = dataset;
+          this.renderChart();
+        }, () => {
+          this.parametersService.setReadySubject(true);
+        });
+        break;
 
-    // bubbleSort(this.dataset, this.legend, this.parameters.speed, (dataset) => {
-    //   this.dataset = dataset;
-    //   this.renderChart();
-    // }, () => {
-    //   this.parametersService.setReadySubject(true);
-    // });
+      case 'Selection':
+        selectionSort(this.dataset, this.legend, this.parameters.speed, (dataset) => {
+          this.dataset = dataset;
+          this.renderChart();
+        }, () => {
+          this.parametersService.setReadySubject(true);
+        });
+        break;
 
-
-    selectionSort(this.dataset, this.legend, this.parameters.speed, (dataset) => {
-      this.dataset = dataset;
-      this.renderChart();
-    }, () => {
-      this.parametersService.setReadySubject(true);
-    });
+      case 'Bubble':
+        bubbleSort(this.dataset, this.legend, this.parameters.speed, (dataset) => {
+          this.dataset = dataset;
+          this.renderChart();
+        }, () => {
+          this.parametersService.setReadySubject(true);
+        });
+        break;
+    }
   }
 
   generateArray() {
