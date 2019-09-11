@@ -45,6 +45,101 @@ module.exports = "<div class=\"row pt-3\">\n  <div class=\"col\">\n      <div cl
 
 /***/ }),
 
+/***/ "./src/app/algorthms/bubble-sort.ts":
+/*!******************************************!*\
+  !*** ./src/app/algorthms/bubble-sort.ts ***!
+  \******************************************/
+/*! exports provided: bubbleSort */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bubbleSort", function() { return bubbleSort; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers */ "./src/app/algorthms/helpers.ts");
+
+
+function bubbleSort(dataset, legend, speed, render, callback) {
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        var delayTime, colors, length, i, j, stop;
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    delayTime = speed;
+                    colors = legend;
+                    length = dataset.values.length;
+                    return [4 /*yield*/, render(dataset)];
+                case 1:
+                    _a.sent();
+                    i = 0;
+                    _a.label = 2;
+                case 2:
+                    if (!(i < length)) return [3 /*break*/, 14];
+                    j = 0, stop = length - i;
+                    _a.label = 3;
+                case 3:
+                    if (!(j < stop)) return [3 /*break*/, 12];
+                    dataset.color[j] = colors.comparing;
+                    dataset.color[j + 1] = colors.comparing;
+                    return [4 /*yield*/, render(dataset)];
+                case 4:
+                    _a.sent();
+                    return [4 /*yield*/, Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime)];
+                case 5:
+                    _a.sent();
+                    if (!(dataset.values[j] > dataset.values[j + 1])) return [3 /*break*/, 8];
+                    dataset.color[j] = colors.swaping;
+                    dataset.color[j + 1] = colors.swaping;
+                    return [4 /*yield*/, render(dataset)];
+                case 6:
+                    _a.sent();
+                    return [4 /*yield*/, Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime)];
+                case 7:
+                    _a.sent();
+                    swap(dataset.values, j, j + 1);
+                    _a.label = 8;
+                case 8:
+                    dataset.color[j] = colors.default;
+                    dataset.color[j + 1] = colors.default;
+                    return [4 /*yield*/, render(dataset)];
+                case 9:
+                    _a.sent();
+                    return [4 /*yield*/, Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime)];
+                case 10:
+                    _a.sent();
+                    _a.label = 11;
+                case 11:
+                    j++;
+                    return [3 /*break*/, 3];
+                case 12:
+                    for (j = 0; j < length - 1 - i; j++) {
+                        dataset.color[length - 1 - i + j] = colors.sorted;
+                    }
+                    _a.label = 13;
+                case 13:
+                    i++;
+                    return [3 /*break*/, 2];
+                case 14:
+                    for (i = 0; i < length; i++) {
+                        dataset.color[i] = colors.sorted;
+                    }
+                    Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime);
+                    render(dataset);
+                    callback();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function swap(array, firstIndex, secondIndex) {
+    var temp = array[firstIndex];
+    array[firstIndex] = array[secondIndex];
+    array[secondIndex] = temp;
+}
+
+
+/***/ }),
+
 /***/ "./src/app/algorthms/helpers.ts":
 /*!**************************************!*\
   !*** ./src/app/algorthms/helpers.ts ***!
@@ -57,6 +152,100 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delay", function() { return delay; });
 function delay(milliseconds) {
     return new Promise(function (resolve) { return setTimeout(resolve, milliseconds); });
+}
+
+
+/***/ }),
+
+/***/ "./src/app/algorthms/insertion-sort.ts":
+/*!*********************************************!*\
+  !*** ./src/app/algorthms/insertion-sort.ts ***!
+  \*********************************************/
+/*! exports provided: insertionSort */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "insertionSort", function() { return insertionSort; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers */ "./src/app/algorthms/helpers.ts");
+
+
+function insertionSort(dataset, legend, speed, render, callback) {
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        var delayTime, colors, length, i, j, temp;
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    delayTime = speed;
+                    colors = legend;
+                    length = dataset.values.length;
+                    return [4 /*yield*/, render(dataset)];
+                case 1:
+                    _a.sent();
+                    i = 0;
+                    _a.label = 2;
+                case 2:
+                    if (!(i < length - 1)) return [3 /*break*/, 16];
+                    j = i + 1;
+                    _a.label = 3;
+                case 3:
+                    if (!(j > 0)) return [3 /*break*/, 15];
+                    dataset.color[j] = colors.comparing;
+                    dataset.color[j - 1] = colors.comparing;
+                    return [4 /*yield*/, render(dataset)];
+                case 4:
+                    _a.sent();
+                    return [4 /*yield*/, Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime)];
+                case 5:
+                    _a.sent();
+                    if (!(dataset.values[j] < dataset.values[j - 1])) return [3 /*break*/, 8];
+                    dataset.color[j - 1] = colors.swaping;
+                    dataset.color[j] = colors.swaping;
+                    return [4 /*yield*/, render(dataset)];
+                case 6:
+                    _a.sent();
+                    return [4 /*yield*/, Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime)];
+                case 7:
+                    _a.sent();
+                    temp = dataset.values[j];
+                    dataset.values[j] = dataset.values[j - 1];
+                    dataset.values[j - 1] = temp;
+                    return [3 /*break*/, 11];
+                case 8:
+                    dataset.color[j] = colors.sorted;
+                    dataset.color[j - 1] = colors.sorted;
+                    return [4 /*yield*/, render(dataset)];
+                case 9:
+                    _a.sent();
+                    return [4 /*yield*/, Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime)];
+                case 10:
+                    _a.sent();
+                    return [3 /*break*/, 15];
+                case 11:
+                    dataset.color[j] = colors.sorted;
+                    dataset.color[j - 1] = colors.sorted;
+                    return [4 /*yield*/, render(dataset)];
+                case 12:
+                    _a.sent();
+                    return [4 /*yield*/, Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime)];
+                case 13:
+                    _a.sent();
+                    _a.label = 14;
+                case 14:
+                    j--;
+                    return [3 /*break*/, 3];
+                case 15:
+                    i++;
+                    return [3 /*break*/, 2];
+                case 16:
+                    Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime);
+                    render(dataset);
+                    callback();
+                    return [2 /*return*/];
+            }
+        });
+    });
 }
 
 
@@ -198,13 +387,13 @@ var AppComponent = /** @class */ (function () {
         this.readyText = 'Pick an algorthm';
         this.ready = false;
         this.readyToRun = true;
-        this.speed = 10;
+        this.speed = 200;
         this.parameters = {
             arraySize: 10,
             sortAlgo: null,
             sort: false,
             setArraySize: false,
-            speed: 10
+            speed: 200
         };
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -329,7 +518,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_parameters_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/parameters.service */ "./src/app/services/parameters.service.ts");
 /* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
-/* harmony import */ var _algorthms_selection_sort__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../algorthms/selection-sort */ "./src/app/algorthms/selection-sort.ts");
+/* harmony import */ var _algorthms_bubble_sort__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../algorthms/bubble-sort */ "./src/app/algorthms/bubble-sort.ts");
+/* harmony import */ var _algorthms_selection_sort__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../algorthms/selection-sort */ "./src/app/algorthms/selection-sort.ts");
+/* harmony import */ var _algorthms_insertion_sort__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../algorthms/insertion-sort */ "./src/app/algorthms/insertion-sort.ts");
+
+
 
 
 
@@ -392,15 +585,6 @@ var BarChartComponent = /** @class */ (function () {
                     sorted: 'purple'
                 };
                 break;
-            case 'Quick':
-                this.legend = {
-                    default: 'blue',
-                    currenIndex: 'yellow',
-                    comparing: 'green',
-                    swaping: 'red',
-                    sorted: 'purple'
-                };
-                break;
             case 'Selection':
                 this.legend = {
                     default: 'blue',
@@ -429,18 +613,32 @@ var BarChartComponent = /** @class */ (function () {
             this.dataset.color[i] = this.colors.color1;
         }
         this.parametersService.setReadySubject(false);
-        // bubbleSort(this.dataset, this.legend, this.parameters.speed, (dataset) => {
-        //   this.dataset = dataset;
-        //   this.renderChart();
-        // }, () => {
-        //   this.parametersService.setReadySubject(true);
-        // });
-        Object(_algorthms_selection_sort__WEBPACK_IMPORTED_MODULE_4__["selectionSort"])(this.dataset, this.legend, this.parameters.speed, function (dataset) {
-            _this.dataset = dataset;
-            _this.renderChart();
-        }, function () {
-            _this.parametersService.setReadySubject(true);
-        });
+        switch (this.parameters.sortAlgo) {
+            case 'Insertion':
+                Object(_algorthms_insertion_sort__WEBPACK_IMPORTED_MODULE_6__["insertionSort"])(this.dataset, this.legend, this.parameters.speed, function (dataset) {
+                    _this.dataset = dataset;
+                    _this.renderChart();
+                }, function () {
+                    _this.parametersService.setReadySubject(true);
+                });
+                break;
+            case 'Selection':
+                Object(_algorthms_selection_sort__WEBPACK_IMPORTED_MODULE_5__["selectionSort"])(this.dataset, this.legend, this.parameters.speed, function (dataset) {
+                    _this.dataset = dataset;
+                    _this.renderChart();
+                }, function () {
+                    _this.parametersService.setReadySubject(true);
+                });
+                break;
+            case 'Bubble':
+                Object(_algorthms_bubble_sort__WEBPACK_IMPORTED_MODULE_4__["bubbleSort"])(this.dataset, this.legend, this.parameters.speed, function (dataset) {
+                    _this.dataset = dataset;
+                    _this.renderChart();
+                }, function () {
+                    _this.parametersService.setReadySubject(true);
+                });
+                break;
+        }
     };
     BarChartComponent.prototype.generateArray = function () {
         var _this = this;

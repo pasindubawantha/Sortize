@@ -45,6 +45,68 @@ module.exports = "<div class=\"row pt-3\">\n  <div class=\"col\">\n      <div cl
 
 /***/ }),
 
+/***/ "./src/app/algorthms/bubble-sort.ts":
+/*!******************************************!*\
+  !*** ./src/app/algorthms/bubble-sort.ts ***!
+  \******************************************/
+/*! exports provided: bubbleSort */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bubbleSort", function() { return bubbleSort; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers */ "./src/app/algorthms/helpers.ts");
+
+
+function bubbleSort(dataset, legend, speed, render, callback) {
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+        const delayTime = speed;
+        const colors = legend;
+        const length = dataset.values.length;
+        let i;
+        let j;
+        let stop;
+        yield render(dataset);
+        for (i = 0; i < length; i++) {
+            for (j = 0, stop = length - i; j < stop; j++) {
+                dataset.color[j] = colors.comparing;
+                dataset.color[j + 1] = colors.comparing;
+                yield render(dataset);
+                yield Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime);
+                if (dataset.values[j] > dataset.values[j + 1]) {
+                    dataset.color[j] = colors.swaping;
+                    dataset.color[j + 1] = colors.swaping;
+                    yield render(dataset);
+                    yield Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime);
+                    swap(dataset.values, j, j + 1);
+                }
+                dataset.color[j] = colors.default;
+                dataset.color[j + 1] = colors.default;
+                yield render(dataset);
+                yield Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime);
+            }
+            for (j = 0; j < length - 1 - i; j++) {
+                dataset.color[length - 1 - i + j] = colors.sorted;
+            }
+        }
+        for (i = 0; i < length; i++) {
+            dataset.color[i] = colors.sorted;
+        }
+        Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime);
+        render(dataset);
+        callback();
+    });
+}
+function swap(array, firstIndex, secondIndex) {
+    const temp = array[firstIndex];
+    array[firstIndex] = array[secondIndex];
+    array[secondIndex] = temp;
+}
+
+
+/***/ }),
+
 /***/ "./src/app/algorthms/helpers.ts":
 /*!**************************************!*\
   !*** ./src/app/algorthms/helpers.ts ***!
@@ -57,6 +119,66 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delay", function() { return delay; });
 function delay(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+
+/***/ }),
+
+/***/ "./src/app/algorthms/insertion-sort.ts":
+/*!*********************************************!*\
+  !*** ./src/app/algorthms/insertion-sort.ts ***!
+  \*********************************************/
+/*! exports provided: insertionSort */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "insertionSort", function() { return insertionSort; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers */ "./src/app/algorthms/helpers.ts");
+
+
+function insertionSort(dataset, legend, speed, render, callback) {
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+        const delayTime = speed;
+        const colors = legend;
+        const length = dataset.values.length;
+        let i;
+        let j;
+        let temp;
+        yield render(dataset);
+        for (i = 0; i < length - 1; i++) {
+            for (j = i + 1; j > 0; j--) {
+                dataset.color[j] = colors.comparing;
+                dataset.color[j - 1] = colors.comparing;
+                yield render(dataset);
+                yield Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime);
+                if (dataset.values[j] < dataset.values[j - 1]) {
+                    dataset.color[j - 1] = colors.swaping;
+                    dataset.color[j] = colors.swaping;
+                    yield render(dataset);
+                    yield Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime);
+                    temp = dataset.values[j];
+                    dataset.values[j] = dataset.values[j - 1];
+                    dataset.values[j - 1] = temp;
+                }
+                else {
+                    dataset.color[j] = colors.sorted;
+                    dataset.color[j - 1] = colors.sorted;
+                    yield render(dataset);
+                    yield Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime);
+                    break;
+                }
+                dataset.color[j] = colors.sorted;
+                dataset.color[j - 1] = colors.sorted;
+                yield render(dataset);
+                yield Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime);
+            }
+        }
+        Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayTime);
+        render(dataset);
+        callback();
+    });
 }
 
 
@@ -165,13 +287,13 @@ let AppComponent = class AppComponent {
         this.readyText = 'Pick an algorthm';
         this.ready = false;
         this.readyToRun = true;
-        this.speed = 10;
+        this.speed = 200;
         this.parameters = {
             arraySize: 10,
             sortAlgo: null,
             sort: false,
             setArraySize: false,
-            speed: 10
+            speed: 200
         };
     }
     ngOnInit() {
@@ -291,7 +413,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _services_parameters_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/parameters.service */ "./src/app/services/parameters.service.ts");
 /* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
-/* harmony import */ var _algorthms_selection_sort__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../algorthms/selection-sort */ "./src/app/algorthms/selection-sort.ts");
+/* harmony import */ var _algorthms_bubble_sort__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../algorthms/bubble-sort */ "./src/app/algorthms/bubble-sort.ts");
+/* harmony import */ var _algorthms_selection_sort__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../algorthms/selection-sort */ "./src/app/algorthms/selection-sort.ts");
+/* harmony import */ var _algorthms_insertion_sort__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../algorthms/insertion-sort */ "./src/app/algorthms/insertion-sort.ts");
+
+
 
 
 
@@ -353,15 +479,6 @@ let BarChartComponent = class BarChartComponent {
                     sorted: 'purple'
                 };
                 break;
-            case 'Quick':
-                this.legend = {
-                    default: 'blue',
-                    currenIndex: 'yellow',
-                    comparing: 'green',
-                    swaping: 'red',
-                    sorted: 'purple'
-                };
-                break;
             case 'Selection':
                 this.legend = {
                     default: 'blue',
@@ -389,18 +506,32 @@ let BarChartComponent = class BarChartComponent {
             this.dataset.color[i] = this.colors.color1;
         }
         this.parametersService.setReadySubject(false);
-        // bubbleSort(this.dataset, this.legend, this.parameters.speed, (dataset) => {
-        //   this.dataset = dataset;
-        //   this.renderChart();
-        // }, () => {
-        //   this.parametersService.setReadySubject(true);
-        // });
-        Object(_algorthms_selection_sort__WEBPACK_IMPORTED_MODULE_4__["selectionSort"])(this.dataset, this.legend, this.parameters.speed, (dataset) => {
-            this.dataset = dataset;
-            this.renderChart();
-        }, () => {
-            this.parametersService.setReadySubject(true);
-        });
+        switch (this.parameters.sortAlgo) {
+            case 'Insertion':
+                Object(_algorthms_insertion_sort__WEBPACK_IMPORTED_MODULE_6__["insertionSort"])(this.dataset, this.legend, this.parameters.speed, (dataset) => {
+                    this.dataset = dataset;
+                    this.renderChart();
+                }, () => {
+                    this.parametersService.setReadySubject(true);
+                });
+                break;
+            case 'Selection':
+                Object(_algorthms_selection_sort__WEBPACK_IMPORTED_MODULE_5__["selectionSort"])(this.dataset, this.legend, this.parameters.speed, (dataset) => {
+                    this.dataset = dataset;
+                    this.renderChart();
+                }, () => {
+                    this.parametersService.setReadySubject(true);
+                });
+                break;
+            case 'Bubble':
+                Object(_algorthms_bubble_sort__WEBPACK_IMPORTED_MODULE_4__["bubbleSort"])(this.dataset, this.legend, this.parameters.speed, (dataset) => {
+                    this.dataset = dataset;
+                    this.renderChart();
+                }, () => {
+                    this.parametersService.setReadySubject(true);
+                });
+                break;
+        }
     }
     generateArray() {
         const key = new Array(this.parameters.arraySize);
